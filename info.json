@@ -3,8 +3,13 @@
 		"version": "2.24.0"
 	},
 	"script": {
-		"version": "0.1",
+		"version": "0.2",
 		"history": [
+			{
+				"version": "0.2",
+				"date": "2019-04-04",
+				"notes": "Changed import functionality"
+			},
 			{
 				"version": "0.1",
 				"date": "2019-04-01",
