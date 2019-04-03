@@ -9,7 +9,7 @@ const changelogUrl = "https://github.com/moment/moment/blob/version/CHANGELOG.md
 let infoJson = "https://raw.githubusercontent.com/schl3ck/scriptable-moment/master/info.json";
 const importScriptUrl = "https://raw.githubusercontent.com/schl3ck/scriptable-moment/master/import-moment.js";
 
-const ownVersion = "0.2";
+const ownVersion = "0.3";
 
 const regexGetVersion = /^\/\/ v([\d.]+)/;
 
@@ -47,12 +47,18 @@ if (compVersion(newVersion, ownVersion) > 0) {
 				res = await req.loadString();
 				if (req.response.statusCode >= 400 || res.length < 300) {
 					let a = new Alert();
-					a.title = "Error";
-					a.message = "There was an error while downloading the script:\n" + JSON.stringify(req.response, null, 4);
+					a.title = "There was an error while downloading the script:";
+					a.message = JSON.stringify(req.response, null, 4);
 					a.presentAlert();
 					return;
 				}
 				fm.writeString(fm.joinPath(fm.documentsDirectory(), Script.name() + ".js"), res);
+				
+				let a = new Alert();
+				a.title = "Installation successful";
+				a.message = "Please run this script again, to ckeck for updates of moment.js";
+				a.addCancelAction("OK");
+				a.presentAlert();
 				return;
 			case 1:
 				let wv = new WebView();
@@ -79,7 +85,7 @@ body {
 		}
 	}
 }
-return
+
 
 if (fm.fileExists(completePath)) {
 	let localFile = fm.readString(completePath);
