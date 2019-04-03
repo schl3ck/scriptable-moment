@@ -3,6 +3,12 @@
 		"version": "2.24.0"
 	},
 	"script": {
-		"version": "1.0.0",
+		"version": "1.0",
+		"history": [
+			{
+				"version": "1.0",
+				"notes": "Initial release"
+			}
+		]
 	}
 }
