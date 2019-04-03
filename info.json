@@ -3,10 +3,11 @@
 		"version": "2.24.0"
 	},
 	"script": {
-		"version": "1.0",
+		"version": "0.1",
 		"history": [
 			{
-				"version": "1.0",
+				"version": "0.1",
+				"date": "2019-04-01",
 				"notes": "Initial release"
 			}
 		]
