@@ -1,6 +1,3 @@
-// Variables used by Scriptable.
-// These must be at the very top of the file. Do not edit.
-// icon-color: deep-green; icon-glyph: download;
 // if you move the file, please adjust this, otherwise this script doesn't know where it is
 const filePath = "lib/moment.js";
 
@@ -9,7 +6,7 @@ const changelogUrl = "https://github.com/moment/moment/blob/version/CHANGELOG.md
 let infoJson = "https://raw.githubusercontent.com/schl3ck/scriptable-moment/master/info.json";
 const importScriptUrl = "https://raw.githubusercontent.com/schl3ck/scriptable-moment/master/import-moment.js";
 
-const ownVersion = "0.3";
+const ownVersion = "0.4";
 
 const regexGetVersion = /^\/\/ v([\d.]+)/;
 
@@ -49,6 +46,7 @@ if (compVersion(newVersion, ownVersion) > 0) {
 					let a = new Alert();
 					a.title = "There was an error while downloading the script:";
 					a.message = JSON.stringify(req.response, null, 4);
+					a.addCancelAction("OK");
 					a.presentAlert();
 					return;
 				}
@@ -56,7 +54,7 @@ if (compVersion(newVersion, ownVersion) > 0) {
 				
 				let a = new Alert();
 				a.title = "Installation successful";
-				a.message = "Please run this script again, to ckeck for updates of moment.js";
+				a.message = "Please run this script again, to check for updates of moment.js";
 				a.addCancelAction("OK");
 				a.presentAlert();
 				return;
@@ -75,7 +73,7 @@ body {
 <body>
 	${infoJson.script.history.map(h => {
 		return `<h2>v${h.version} - ${h.date}</h2>
-<p>${h.notes}</p>`;
+<p>${h.htmlNotes || (h.notes || "").replace(/\n/g, "<br>")}</p>`;
 	}).join("\n")}
 </body>
 </html>`);
@@ -130,6 +128,14 @@ if (fm.fileExists(completePath)) {
 
 req = new Request(remoteUrl);
 let remoteFile = await req.loadString();
+if (req.response.statusCode >= 400 || remoteFile.length < 100) {
+	let a = new Alert();
+	a.title = "There was an error while downloading moment.js:";
+	a.message = JSON.stringify(req.response, null, 4);
+	a.addCancelAction("OK");
+	a.presentAlert();
+	return;
+}
 
 fm.writeString(completePath, remoteFile);
 
