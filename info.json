@@ -1,25 +1,32 @@
 {
-	"moment": {
-		"version": "2.24.0"
-	},
-	"script": {
-		"version": "0.3",
-		"history": [
-			{
-				"version": "0.3",
-				"date": "2019-04-04",
-				"notes": "Added confirmation dialog after updating the import script\nRemoved return statement before moment.js version check"
-			},
-			{
-				"version": "0.2",
-				"date": "2019-04-04",
-				"notes": "Changed import functionality"
-			},
-			{
-				"version": "0.1",
-				"date": "2019-04-01",
-				"notes": "Initial release for testing"
-			}
-		]
-	}
+    "moment": {
+        "version": "2.24.0"
+    },
+    "script": {
+        "version": "0.4",
+        "history": [
+            {
+                "version": "0.4",
+                "date": "2019-04-04",
+                "notes": "• Added fail checking for 𝚖𝚘𝚖𝚎𝚗𝚝.𝚓𝚜 download\n\n• Added HTML pre formatted notes to the changelog",
+                "htmlNotes": "<ul>\n<li>Added fail checking for <code>moment.js</code> download</li>\n<li>Added HTML pre formatted notes to the changelog</li>\n</ul>\n"
+            },
+            {
+                "version": "0.3",
+                "date": "2019-04-04",
+                "notes": "Added confirmation dialog after updating the import script\nRemoved return statement before moment.js version check"
+            },
+            {
+                "version": "0.2",
+                "date": "2019-04-04",
+                "notes": "Changed import functionality"
+            },
+            {
+                "version": "0.1",
+                "date": "2019-04-01",
+                "notes": "Initial release for testing"
+            }
+        ]
+    }
 }
+
