@@ -1,12 +1,17 @@
-// if you move the file, please adjust this, otherwise this script doesn't know where it is
+// Variables used by Scriptable.
+// These must be at the very top of the file. Do not edit.
+// icon-color: deep-green; icon-glyph: download;
+// if you move the file, please adjust this, otherwise this script doesn't know where it is and downloads it again
 const filePath = "lib/moment.js";
 
-const remoteUrl = "https://raw.githubusercontent.com/schl3ck/scriptable-moment/master/moment-with-locales.min.js";
+const remoteUrl = "https://raw.githubusercontent.com/moment/moment/version/min/moment-with-locales.min.js";
 const changelogUrl = "https://github.com/moment/moment/blob/version/CHANGELOG.md";
+let momentTags = "https://api.github.com/repos/moment/moment/tags";
+
 let infoJson = "https://raw.githubusercontent.com/schl3ck/scriptable-moment/master/info.json";
 const importScriptUrl = "https://raw.githubusercontent.com/schl3ck/scriptable-moment/master/import-moment.js";
 
-const ownVersion = "0.4";
+const ownVersion = "0.5";
 
 const regexGetVersion = /^\/\/ v([\d.]+)/;
 
@@ -22,14 +27,14 @@ let completePath = fm.joinPath(fm.documentsDirectory(), filePath);
 let req = new Request(infoJson);
 infoJson = await req.loadJSON();
 
-let newVersion = infoJson.script.version;
+let newVersion = infoJson.version;
 
 if (compVersion(newVersion, ownVersion) > 0) {
 	loop:
 	while (true) {
 		let a = new Alert();
 		a.title = `New ${Script.name()} version: ${ownVersion} ⇒ ${newVersion}`;
-		a.message = infoJson.script.history.find(h => h.version === newVersion).notes;
+		a.message = infoJson.history.find(h => h.version === newVersion).notes;
 		
 		a.addCancelAction("Cancel");
 		a.addAction("Install");
@@ -71,7 +76,7 @@ body {
 </style>
 </head>
 <body>
-	${infoJson.script.history.map(h => {
+	${infoJson.history.map(h => {
 		return `<h2>v${h.version} - ${h.date}</h2>
 <p>${h.htmlNotes || (h.notes || "").replace(/\n/g, "<br>")}</p>`;
 	}).join("\n")}
@@ -85,11 +90,14 @@ body {
 }
 
 
+req = new Request(momentTags);
+momentTags = await req.loadJSON();
+
+newVersion = momentTags[0].name;
+
 if (fm.fileExists(completePath)) {
 	let localFile = fm.readString(completePath);
 	let currentVersion = localFile.match(regexGetVersion)[1];
-
-	newVersion = infoJson.moment.version;
 	
 	if (compVersion(currentVersion, newVersion)) {
 		loop:
@@ -126,7 +134,7 @@ if (fm.fileExists(completePath)) {
 		fm.createDirectory(folders, true);
 }
 
-req = new Request(remoteUrl);
+req = new Request(remoteUrl.replace("version", newVersion));
 let remoteFile = await req.loadString();
 if (req.response.statusCode >= 400 || remoteFile.length < 100) {
 	let a = new Alert();
@@ -137,7 +145,7 @@ if (req.response.statusCode >= 400 || remoteFile.length < 100) {
 	return;
 }
 
-fm.writeString(completePath, remoteFile);
+fm.writeString(completePath, `// v${newVersion}\n` + remoteFile);
 
 let a = new Alert();
 a.title = "Downloaded and saved file to:";

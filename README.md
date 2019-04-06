@@ -2,14 +2,15 @@
 
 Scriptable is an iOS app in which you can write JavaScript to automate stuff.
 
-This is just a modified version of moment.js that works with the Scriptable 1.3 `importModule()` function.
+To use moment.js:
 
-To use this, download one of the files (the `*.min.js` file is just a minified version) to the Scriptable iCloud folder and rename it to `moment.js`. Then import it with
+1. Open https://raw.githubusercontent.com/schl3ck/scriptable-moment/import-moment.js in your browser and copy the contents
+2. Paste them into a new Scriptable script
+3. Run the script once and it will import moment.js to `iCloud/Scriptable/lib/moment.js` if you have iCloud enabled, otherwise to `<Scriptable documentsDirectory>/lib/moment.js`
+4. Use it in your script with
+	```javascript
+	const moment = importModule("lib/moment");
+	let date = moment();
+	```
 
-```javascript
-const moment = importModule("moment.js");
-```
-
-You can also import it by downloading the file `import-moment.scriptable`, tap `Copy to Scriptable` in the iOS share dialog and then run it once inside Scriptable. It will download the minified version and save it in `lib/moment.js`. If you have iCloud enabled, you will find it in iCloud, otherwise it is only accessible with the `FileManager` API in the Scriptable `documentsDirectory`. After the import, you can delete it, or keep it to check for updates now and then.
-
-This uses moment.js version 2.24.0
+Run the script again to check for updates of the script and moment.js
