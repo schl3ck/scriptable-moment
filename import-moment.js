@@ -11,15 +11,17 @@ let momentTags = "https://api.github.com/repos/moment/moment/tags";
 let infoJson = "https://raw.githubusercontent.com/schl3ck/scriptable-moment/master/info.json";
 const importScriptUrl = "https://raw.githubusercontent.com/schl3ck/scriptable-moment/master/import-moment.js";
 
-const ownVersion = "0.5";
+const ownVersion = "1.0";
 
 const regexGetVersion = /^\/\/ v([\d.]+)/;
 
 let fm;
+let iCloud = true;
 try {
 	fm = FileManager.iCloud();
 } catch (err) {
 	fm = FileManager.local();
+	iCloud = false;
 }
 
 let completePath = fm.joinPath(fm.documentsDirectory(), filePath);
@@ -149,7 +151,7 @@ fm.writeString(completePath, `// v${newVersion}\n` + remoteFile);
 
 let a = new Alert();
 a.title = "Downloaded and saved file to:";
-a.message = filePath;
+a.message = (iCloud ? "iCloud/" : "local/") + filePath;
 a.addCancelAction("OK");
 a.presentAlert();
 
