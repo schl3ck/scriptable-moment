@@ -17,8 +17,7 @@
         {
             "version": "0.3",
             "date": "2019-04-04",
-            "notes": "Added confirmation dialog after updating the import script
-Removed return statement before moment.js version check"
+            "notes": "Added confirmation dialog after updating the import script\nRemoved return statement before moment.js version check"
         },
         {
             "version": "0.2",
