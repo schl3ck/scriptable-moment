@@ -5,18 +5,12 @@
             "version": "0.5",
             "date": "2019-04-06",
             "notes": "Removed own version of 𝚖𝚘𝚖𝚎𝚗𝚝.𝚓𝚜 as the original version works as well",
-            "htmlNotes": "<p>Removed own version of <code>moment.js</code> as the original version works as well</p>
-"
+            "htmlNotes": "<p>Removed own version of <code>moment.js</code> as the original version works as well</p>"
         },
         {
             "date": "2019-04-04",
-            "notes": "• Added fail checking for 𝚖𝚘𝚖𝚎𝚗𝚝.𝚓𝚜 download
-
-• Added HTML pre formatted notes to the changelog",
-            "htmlNotes": "<ul>
-<li>Added fail checking for <code>moment.js</code> download</li>
-<li>Added HTML pre formatted notes to the changelog</li>
-</ul>
+            "notes": "• Added fail checking for 𝚖𝚘𝚖𝚎𝚗𝚝.𝚓𝚜 download\n\n• Added HTML pre formatted notes to the changelog",
+            "htmlNotes": "<ul>\n<li>Added fail checking for <code>moment.js</code> download</li>\n<li>Added HTML pre formatted notes to the changelog</li>\n</ul>
 ",
             "version": "0.4"
         },
